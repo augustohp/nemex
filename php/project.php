@@ -32,7 +32,11 @@
    			$expected_base_dir = realpath(NEMEX_PATH.'projects/');
    			$path_info = pathinfo(realpath(NEMEX_PATH.'projects/'.$name));
 
-   			if ($path_info['dirname'] AND $path_info['dirname'] === $expected_base_dir) {
+   			// debug($expected_base_dir, 'expected_base_dir');
+   			// debug(realpath(NEMEX_PATH.'projects/'.$name), 'realpath');
+   			// debug($path_info, 'path_info');
+
+   			if (isset($path_info['dirname']) AND $path_info['dirname'] === $expected_base_dir) {
    				return $path_info['basename'];
    			}
    		}
@@ -227,10 +231,14 @@ echo '';
 
 		function getTitleImage() {
 			$this->getNodes();
+
+			// print_r($this->nodes);
 			
-			foreach ($this->nodes as $node)
-				 if($node->getType() == 'img')
+			foreach ($this->nodes as $node) {
+				if($node->getType() == 'img') {
 					return $this->name.'/'.$node->getName();
+				}
+			}
 		}
 
 
@@ -240,4 +248,3 @@ echo '';
 
 	}
 
-?>
