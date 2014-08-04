@@ -1,6 +1,6 @@
 <?php
 
-	include(NEMEX_PATH.'auth.php');
+	include_once(NEMEX_PATH.'auth.php');
 
 	include_once NEMEX_PATH."php/markdown.php";
 	include_once NEMEX_PATH."php/node.php";
@@ -18,8 +18,23 @@
 
 
 		function __construct( $pname, $uid ) {
-       		$this->name = $pname;
+			$this->name = $this->normalizeName($pname);
        		$this->user_id = $uid;
+
+       		if ( ! $this->name) {
+       			exit('Invalid project name');
+       			// or: throw new Exception('Invalid project name');
+       		}
+   		}
+
+
+   		function normalizeName($name = '') {
+   			$expected_base_dir = realpath(NEMEX_PATH.'projects/');
+   			$path_info = pathinfo(realpath(NEMEX_PATH.'projects/'.$name));
+
+   			if ($path_info['dirname'] AND $path_info['dirname'] === $expected_base_dir) {
+   				return $path_info['basename'];
+   			}
    		}
 
 
@@ -33,12 +48,20 @@
    		}
 
    		function getNumNodes(){
-   			$this->num_nodes = count(scandir(NEMEX_PATH.'projects/'.$this->name))-4;
+   			$nodes_in_folder = scandir(NEMEX_PATH.'projects/'.$this->name);
+
+   			$nodes_in_folder = array_filter($nodes_in_folder, create_function('$node_name', '
+   				return (substr($node_name, 0, 1) !== "." AND ! in_array($node_name, ["index.php", "big"]));
+   			'));
+
+   			$this->num_nodes = count($nodes_in_folder);
    			return $this->num_nodes;
    		}
 
 
    		function showProject(){
+
+   			$align = 'r';
 
    			echo '<div class="header"><span>'.$this->getName().'</span></div>';
 
@@ -109,7 +132,7 @@ echo '';
 								<p class="date">'.$datum.'</p>
 								<div class="ncontent">';
 						 	
-						 	$this->getColumn($node->getContent(), r); 
+						 	$this->getColumn($node->getContent(), 'r'); 
 						 	echo '</div></div>
 								<div class="c3edit"><textarea class="editareafield"></textarea>
 								<div class="save"></div><div class="discardUpdate"></div>
@@ -182,6 +205,9 @@ echo '';
 			$files = array();
 			
 			$f = glob(NEMEX_PATH.'projects/'.$this->name.'/{*.jpg,*.gif,*.png,*.md,*.txt}', GLOB_BRACE);
+
+			// print_r(NEMEX_PATH.'projects/'.$this->name.'/{*.jpg,*.gif,*.png,*.md,*.txt}');
+
 			if (is_array($f) && count($f) > 0) {
 				$files = $f;
 			}

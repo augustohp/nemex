@@ -1,5 +1,5 @@
 <?php
-	include(NEMEX_PATH.'auth.php');
+	include_once(NEMEX_PATH.'auth.php');
 
 	class user {
 	
@@ -19,17 +19,24 @@
 
 			if ($handle = opendir(NEMEX_PATH.'projects')) {
 			    $blacklist = array('.', '..');
-			    while (false !== ($file = readdir($handle))) 
-			        if (!in_array($file, $blacklist)) 
-			        	 $plist[filemtime(NEMEX_PATH.'projects/'.$file)] = $file;
+			    
+			    while (false !== ($file = readdir($handle))) {
+			    	$full_path = NEMEX_PATH.'projects/'.$file;
+			    	
+			        if ( ! in_array($file, $blacklist) AND is_dir($full_path)) {
+			        	$plist[filemtime($full_path)] = $file;
+			       	}
+			    }
 
-			ksort($plist);
-			$plist = array_reverse($plist);
+				krsort($plist);
 
-			foreach ($plist as $p)
-				array_push($this->projects, new project( $p, $this->user_id ) );
-		
-			closedir($handle);			    
+				// print_r($plist);
+
+				foreach ($plist as $p) {
+					array_push($this->projects, new project( $p, $this->user_id ) );
+				}
+			
+				closedir($handle);			    
 			}
 		}
 
@@ -43,7 +50,7 @@
 			
 			if(sizeof($this->projects) > 0) {		
 				foreach ($this->projects as $project)
-					echo "<a href='index.php?view=".$project->getName()."'>
+					echo "<a href='?view=".$project->getName()."'>
 							<div class='project-list-item' style='background:linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(projects/".$project->getTitleImage().") no-repeat left center; background-size: 100% auto ; '>
 								<div class='item-info'>".$project->getName()."<br /> <span class='node-amount'>".$project->getNumNodes()." nodes</span></div>
 								

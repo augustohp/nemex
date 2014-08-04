@@ -1,5 +1,5 @@
 <?php
-  include(NEMEX_PATH.'auth.php');
+  include_once(NEMEX_PATH.'auth.php');
 
 class node {
 
@@ -24,8 +24,8 @@ class node {
 
 
  function extractTime() {
-  $this->unixtime = basename($this->name);
-  $this->time = date("j. F Y",  basename($this->name));;
+  $timestamp = filemtime(NEMEX_PATH.'projects/'.$this->project.'/'.$this->name);
+  $this->time = date("j. F Y", $timestamp);
  }
 
 

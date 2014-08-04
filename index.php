@@ -2,8 +2,7 @@
 	define('NEMEX_PATH', '');
 
 
-	include(NEMEX_PATH.'auth.php');
-	session_start();
+	include_once(NEMEX_PATH.'auth.php');
 
 	include_once(NEMEX_PATH.'php/functions.php');
 	include_once('php/project.php');

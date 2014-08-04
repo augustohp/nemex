@@ -1,7 +1,7 @@
 <?php
 	define('NEMEX_PATH', '../');
 
-	include(NEMEX_PATH.'auth.php');
+	include_once(NEMEX_PATH.'auth.php');
 
 
 	if($_GET['ext'] == 'txt' || $_GET['ext'] == 'md'){

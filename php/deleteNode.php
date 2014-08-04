@@ -1,7 +1,7 @@
 <?php
 	define('NEMEX_PATH', '../');
 
-	include(NEMEX_PATH.'auth.php');
+	include_once(NEMEX_PATH.'auth.php');
 
 	if(!empty($_POST['itemId'])){ 
 		unlink(NEMEX_PATH.'projects/'.$_POST['project']."/".$_POST['itemId']);
