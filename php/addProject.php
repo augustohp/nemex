@@ -7,9 +7,8 @@
 
 		$newp = clearUTF(preg_replace('/\s+/', '', $_POST['newProject']));
 		$newp = substr(preg_replace('/[^\p{L}\p{N}\s]/u', '', $newp), 0, 18);
-		
 
-		if (!file_exists(NEMEX_PATH.'projects/'.$newp)) {
+		if (strlen($newp) AND ! file_exists(NEMEX_PATH.'projects/'.$newp)) {
 			$redirect = '<?php 
 				header("HTTP/1.0 404 Not Found");
 				?>';
@@ -30,10 +29,10 @@
 			umask($old);
 
 		 	
+		} else {
+			echo "no";
 		}
-		else echo "no";
-	}else echo "error";
 
-
-
-?>
+	} else {
+		echo "error";
+	}
