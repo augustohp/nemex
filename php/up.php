@@ -56,6 +56,9 @@
 	$height = $exif['COMPUTED']['Height'];
 
 	$ext = 	strtolower($path_parts['extension']);
+
+	if ($ext === 'jpeg') $ext = 'jpg';
+
 	$name = time().'-'.$filehash.'.'.$ext;
 	$filename = NEMEX_PATH.'projects/'.$project.'/'.$name;
 
