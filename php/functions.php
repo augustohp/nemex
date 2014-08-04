@@ -1,5 +1,14 @@
 <?php
 
+	function debug($d = '', $title = '') {
+		if (error_reporting()) {
+			if ($title) {
+				debug('<b>'.print_r($title, true).":</b>\n");
+			}
+			echo '<pre>' . print_r($d, true) . "</pre>\n";
+		}
+	}
+
 	function randomHash() {
 	    return md5(uniqid(rand(), true).microtime().microtime());
 	}
