@@ -1,7 +1,6 @@
 <?php
-	define('NEMEX_PATH', '../');
+	require __DIR__.'/../bootstrap.php';
 
-	include_once(NEMEX_PATH.'auth.php');
 	if(isset($_POST['project'])) {
 
 		foreach (new DirectoryIterator(NEMEX_PATH.'projects/'.$_POST['project'].'/big') as $fileInfo) {

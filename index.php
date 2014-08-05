@@ -1,15 +1,11 @@
-<?php 
-	define('NEMEX_PATH', '');
+<?php
+    require 'bootstrap.php';
 
-
-	include_once(NEMEX_PATH.'auth.php');
-
-	include_once(NEMEX_PATH.'php/functions.php');
 	include_once('php/project.php');
 	include_once('php/user.php');
 
 	$u = new user('1');
-			
+
 ?>
 
 <html>
@@ -28,7 +24,7 @@
 		<link rel="apple-touch-icon" sizes="152x152" href="img/touch-icon-ipad-retina.png">
 		<script> var noElements = 0; </script>
 		<link rel="icon" type="image/png" href="favicon.png" />
-		
+
 
 	</head>
 
@@ -43,7 +39,7 @@
 	</div>
 
 
-	<?php 
+	<?php
 		if(isset($_GET['view']) ) {
 			$p = new project($_GET['view'], '1');
 			$p->getNodes();
@@ -63,14 +59,14 @@
 					</div>';
 
 			$u->showProjects();
-			
+
 			echo '</div>';
 			echo '<div class="navigation">
 			<a class="index" href="logout.php"><img src="img/logout.svg" /></a>
 			</div>';
 		}
 	 ?>
-	
+
 	<div class="preloader">
 		<img src="img/cancel@2x.png" />
 		<img src="img/cancel_edit@2x.png" />
@@ -86,4 +82,4 @@
 	<script src="js/snap.min.js" type="text/javascript"></script>
 	<script src="js/webapp.js" type="text/javascript"></script>
 </body>
-</html>  
+</html>

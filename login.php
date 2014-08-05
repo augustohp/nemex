@@ -1,8 +1,5 @@
 <?php
-    define('NEMEX_PATH', '');
-
-    include(NEMEX_PATH.'config.php');
-
+require 'bootstrap.php';
 
      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       session_start();
@@ -42,7 +39,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/style-res.css">
     <link rel="icon" type="image/png" href="favicon.png" />
-   
+
    </head>
 
   <body class="login">
@@ -56,7 +53,7 @@
 
 	<footer>
 		<p>made by <a href="http://neonelephant.de">neonelephant</a></p>
-		
+
 		</footer>
 
  </body>

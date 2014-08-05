@@ -1,10 +1,8 @@
 <?php
-	define('NEMEX_PATH', '../');
+require __DIR__.'/../bootstrap.php';
 
-	include_once(NEMEX_PATH.'auth.php');
-	include_once(NEMEX_PATH.'php/functions.php');
 
-	function imagecreatefromjpegexif($filename) {	
+	function imagecreatefromjpegexif($filename) {
         $img = imagecreatefromjpeg($filename);
         $exif = exif_read_data($filename);
         if ($img && $exif && isset($exif['Orientation']))
@@ -28,6 +26,10 @@
 	$filehash = substr(randomHash(), 12);
 
 	$project = $_POST['project'];
+    if (empty($_POST['project'])) {
+        var_dump($_POST);
+        die('Project not defined.');
+    }
 
 
 	$path_parts = pathinfo($_FILES['file']['name']);
@@ -39,9 +41,9 @@
 
 
 
-	if($extension=="jpg" || $extension=="jpeg") 
+	if($extension=="jpg" || $extension=="jpeg")
 		$src = imagecreatefromjpegexif($uploadedfile);
-	else if($extension=="png") 
+	else if($extension=="png")
 		$src = imagecreatefrompng($uploadedfile);
 	else if($extension=="gif")
 		$src = imagecreatefromgif($uploadedfile);
@@ -64,18 +66,18 @@
 
 	if( !$exif) {
 		list($width, $height, $type, $attr) = getimagesize($_FILES['file']['tmp_name']);
-	}	
+	}
 
 	if($width >= 800) {
 		$newwidth = 800;
-		
-		
+
+
 		if( $exif['Orientation'] == 5 || $exif['Orientation'] == 6 || $exif['Orientation'] == 8)
-			$newheight = intval( $newwidth / ($height/$width)  );	
-		else 
+			$newheight = intval( $newwidth / ($height/$width)  );
+		else
 			$newheight = intval( ($height/$width) * $newwidth );
-		
-		
+
+
 		$tmp=imagecreatetruecolor($newwidth,$newheight);
 
 		// preserve transparency
@@ -86,12 +88,12 @@
 		}
 
 
-		if( $exif['Orientation'] == 5 || $exif['Orientation'] == 6 || $exif['Orientation'] == 8)	
+		if( $exif['Orientation'] == 5 || $exif['Orientation'] == 6 || $exif['Orientation'] == 8)
 			imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight, $height, $width);
-		else 
+		else
 			imagecopyresampled($tmp,$src,0,0,0,0,$newwidth,$newheight, $width, $height);
 
-		
+
 		switch($extension){
 		    case 'bmp': imagewbmp($tmp, $filename); break;
 		    case 'gif': imagegif($tmp, $filename); break;
@@ -108,7 +110,7 @@
 		$ext = 	strtolower($path_parts['extension']);
 		$name = time().'-'.$filehash.'.'.$ext;
 		$filepath = NEMEX_PATH.'projects/'.$project.'/'.$name;
-		
+
 		if(move_uploaded_file($_FILES['file']['tmp_name'], $filepath)) {
 			copy($filepath, NEMEX_PATH.'projects/'.$project.'/big/'.$name);
 		}
@@ -117,5 +119,5 @@
 	}
 
 	imagedestroy($src);
-	
+
 ?>

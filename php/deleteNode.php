@@ -1,17 +1,16 @@
 <?php
-	define('NEMEX_PATH', '../');
+	require __DIR__.'/../bootstrap.php';
 
-	include_once(NEMEX_PATH.'auth.php');
 	include_once(NEMEX_PATH.'php/project.php');
 
-	if(!empty($_POST['itemId'])){ 
+	if(!empty($_POST['itemId'])){
 
 		$Project = new project($_POST['project'], '1');
 
 		if (strlen($Project->name)) {
 
 			$expected_base_dir = realpath(NEMEX_PATH.'projects/' . $Project->name);
-			
+
 			$possible_item_paths = [];
 			$possible_item_paths[] = realpath($expected_base_dir . '/' . $_POST['itemId']);
 			$possible_item_paths[] = realpath($expected_base_dir . '/big/' . $_POST['itemId']);

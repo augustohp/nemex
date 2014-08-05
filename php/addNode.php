@@ -1,14 +1,10 @@
 <?php
 
-	/* 
+	/*
 		save text-node in project folder
 	*/
 
-	define('NEMEX_PATH', '../');
-
-
-	include_once(NEMEX_PATH.'auth.php');
-	include_once(NEMEX_PATH.'php/functions.php');
+	require __DIR__.'/../bootstrap.php';
 
 	if(isset($_POST['itemContent'])) {
 		$filehash = substr(randomHash(), 12);

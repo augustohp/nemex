@@ -1,5 +1,5 @@
 <?php
-  include_once(NEMEX_PATH.'auth.php');
+  require __DIR__.'/../bootstrap.php';
 
 class node {
 

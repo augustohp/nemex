@@ -1,12 +1,10 @@
 <?php
-	define('NEMEX_PATH', '../');
+	require __DIR__.'/../bootstrap.php';
 
-	include_once(NEMEX_PATH.'auth.php');
-	include_once(NEMEX_PATH.'php/functions.php');
 
-	if(!empty($_POST['itemId'])){ 
+	if(!empty($_POST['itemId'])){
 		$filehash = substr(randomHash(), 12);
-		$file = NEMEX_PATH.'projects/'.$_POST['project']."/".time().'-'.$filehash.'.md';	
+		$file = NEMEX_PATH.'projects/'.$_POST['project']."/".time().'-'.$filehash.'.md';
 
 		// Fügt eine neue Person zur Datei hinzu
 		$current = $_POST['itemContent'];

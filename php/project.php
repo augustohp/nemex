@@ -1,6 +1,5 @@
 <?php
-
-	include_once(NEMEX_PATH.'auth.php');
+require __DIR__.'/../bootstrap.php';
 
 	include_once NEMEX_PATH."php/markdown.php";
 	include_once NEMEX_PATH."php/node.php";
@@ -69,18 +68,18 @@
 
    			echo '<div class="header"><span>'.$this->getName().'</span></div>';
 
-   			echo '<div id="editmenu"></div>';	
+   			echo '<div id="editmenu"></div>';
 
 			echo '<div class="navigation"><a class="index" href="index.php"><img src="img/nemex.svg" /></a>
-										
+
 										<a id="markdownhelp"><img src="img/markdown.svg" /></a>
-			
+
 			</div>';
-		
+
 echo '';
 
 			echo '<progress id="uploadprogress" min="0" max="100" value="0" >0</progress><div id="project" class="pcontent">';
-			
+
 			echo '<article>';
 			echo '<div id="holder">
 
@@ -91,7 +90,7 @@ echo '';
 			echo '<p id="progress"></p>';
 			echo '</article>';
 
-			
+
 			echo '<div class="activeProject">'.$this->getName().'</div>';
 			echo '
 		   <!-- <input id="pup" class="knob" data-width="120" data-angleOffset="0" data-fgColor="#C0ffff" data-skin="tron" data-thickness=".1" value="0">
@@ -117,9 +116,9 @@ echo '';
 			$counter = 0;
 
 			foreach ($this->nodes as $node) {
-			
-				$datum = $node->getDate(); 
-				
+
+				$datum = $node->getDate();
+
 				echo '<div class="row">
 
 						<div class="snap-drawers">
@@ -129,21 +128,21 @@ echo '';
 						</div>
 
 						<div  class="itemId">'.$node->getName().'</div>';
-									
+
 
 						if( $node->getType() == "md" || $node->getType() == "txt") {
 							echo '<div id="p'.$counter.'" class="snap-content c3" \'style=visibility:hidden;\'>
 								<p class="date">'.$datum.'</p>
 								<div class="ncontent">';
-						 	
-						 	$this->getColumn($node->getContent(), 'r'); 
+
+						 	$this->getColumn($node->getContent(), 'r');
 						 	echo '</div></div>
 								<div class="c3edit"><textarea class="editareafield"></textarea>
 								<div class="save"></div><div class="discardUpdate"></div>
 								<div class="backup"></div>';
 
 							echo '</div>';
-				
+
 						} else if( $node->getType() == "img"){
 							echo '
 								<div id="p'.$counter.'" class="snap-content c3" >
@@ -158,15 +157,15 @@ echo '';
 										echo'
 										<div class="actions image">
 											<div class="download-big"></div>
-											<div class="delete-big"></div>		
+											<div class="delete-big"></div>
 										</div>
 									</div>
 								</div>
 								<div class="c3edit"><span class="save">save</span><br /><textarea class="editareafield"></textarea></div>';
-						 } 
+						 }
 					echo '</div>';
 					$counter++;
-			}	
+			}
 			echo '</div>';
 			echo '<script> var noElements = '.$counter.';
 			</script>';
@@ -175,15 +174,15 @@ echo '';
 
 
 
-		function getColumn($content, $align) {	
+		function getColumn($content, $align) {
 				//$content = substr($content, 17, strlen($content));
-				echo '<div class="content">'; 
+				echo '<div class="content">';
 				echo Markdown($content);
 				echo '</div>';
 				echo '<div class="actions">';
 				echo '<div class="edit-big" data-target="'.$align.'"></div>';
-				echo '<div class="download-big"></div>';	
-				echo '<div class="delete-big"></div>';		
+				echo '<div class="download-big"></div>';
+				echo '<div class="delete-big"></div>';
 				echo '</div>';
 		}
 
@@ -207,7 +206,7 @@ echo '';
 
 		function getNodes() {
 			$files = array();
-			
+
 			$f = glob(NEMEX_PATH.'projects/'.$this->name.'/{*.jpg,*.gif,*.png,*.md,*.txt}', GLOB_BRACE);
 
 			// print_r(NEMEX_PATH.'projects/'.$this->name.'/{*.jpg,*.gif,*.png,*.md,*.txt}');
@@ -233,7 +232,7 @@ echo '';
 			$this->getNodes();
 
 			// print_r($this->nodes);
-			
+
 			foreach ($this->nodes as $node) {
 				if($node->getType() == 'img') {
 					return $this->name.'/'.$node->getName();
