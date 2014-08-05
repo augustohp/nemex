@@ -18,10 +18,27 @@ This repo contains several small bugfixes over version 0.98 (from <http://nemex.
 
 ## Installation
 
-1. No source control:
-	1. Download the zip file
-	2. Unzip it and FTP the files to your webserver e.g httpdocs/nemex
-	3. Make sure the /projects folder is writable by PHP.
+You have two different methods of installation:
+
+### I have my own PHP
+
+1. Download the zip file
+2. Unzip it and FTP the files to your webserver e.g httpdocs/nemex
+3. Make sure the /projects folder is writable by PHP.
+
+### You know nothing, John Snow!
+
+This requires some work (~10min, depending on your internet), but it is pretty
+easy:
+
+1. Download and install [VirtualBox](http://www.virtualbox.org/).
+2. Download and install [Vagrant](http://www.vagrantup.com/downloads).
+3. [Download](https://github.com/augustohp/nemex/archive/master.zip) Nemex.
+4. Install it on a directory where you would keep your projects.
+5. Open a terminal and go to the application directory.
+6. Type: `vagrant up` and hit `ENTER`. Wait. :panda:
+7. Open your browser at http://192.168.42.03.xip.io/
+8. Profit and thanks [Nemex][2].
 
 ## Configuration
 
@@ -36,8 +53,9 @@ GPL v3
 
 [The full and righteous list on this link][1], but special kudos to:
 
-- [nemex](https://twitter.com/nemex_io).
+- [nemex][2].
 - [Joel Limberg](https://github.com/joellimberg/nemex).
 - [Iann Channing](https://github.com/ianchanning/nemex).
 
 [1]: https://github.com/augustohp/nemex/graphs/contributors
+[2]: https://twitter.com/nemex_io
