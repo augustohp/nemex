@@ -32,10 +32,13 @@
 	}
 
 
-	setlocale(LC_ALL, 'en_US.UTF8');
 
 	function clearUTF($s)
 	{
+        if (false === extension_loaded('iconv')) {
+            return utf8_decode($s);
+        }
+
 	    $r = '';
 	    $s1 = iconv('UTF-8', 'ASCII//TRANSLIT', $s);
 	    for ($i = 0; $i < strlen($s1); $i++)
@@ -49,6 +52,8 @@
 	}
 
 
+    function normalizeFilePath($path)
+    {
+        return str_replace(array('/', '\\'), DS, $path);
+    }
 
-
-?>
