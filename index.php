@@ -2,7 +2,6 @@
     require 'bootstrap.php';
 
 	include_once('php/project.php');
-	include_once('php/user.php');
 
 	$u = new user('1');
 
