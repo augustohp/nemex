@@ -1,17 +1,14 @@
 # Nemex
 
-This app is taken from <http://nemex.io>.
-This readme is taken from <https://github.com/ianchanning/nemex>
+A **simple** [way of creating notes][4], on your own webserver,
+using [markdown](http://daringfireball.net/projects/markdown/).
 
-Its a simple way of creating notes on your own webserver.
-Notes written in [markdown](http://daringfireball.net/projects/markdown/).
-No database required.
-
-This repo contains several small bugfixes over version 0.98 (from <http://nemex.io>)
+This is not the [official][3] repository, I intend to improve
+this code for personal usage.
 
 ## Requirements
 
-- [PHP](http://php.net) >= 5.2.
+- [PHP](http://php.net) >= 5.4.
 - Required PHP Extensions:
     - [GD](http://br2.php.net/manual/en/book.image.php).
     - [iconv](http://br1.php.net/manual/en/book.iconv.php). (optional, but desired)
@@ -59,3 +56,5 @@ GPL v3
 
 [1]: https://github.com/augustohp/nemex/graphs/contributors
 [2]: https://twitter.com/nemex_io
+[3]: http://nemex.io
+[4]: https://vimeo.com/102683209
