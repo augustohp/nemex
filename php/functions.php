@@ -66,6 +66,7 @@ function redirect($urlPath)
 
     $destinationUrl = sprintf('//%s/%s', $hostname, $urlPath);
     header('Location: '.$destinationUrl);
+
     exit;
 }
 

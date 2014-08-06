@@ -28,11 +28,10 @@ $tests[] = function() {
     );
 };
 $tests[] = function() {
-    $config = new Cfg;
-    $changedConfig = (boolean) ($config->getUsr() != 'nemex' && $config->getPwd() != 'io');
+    $classExists = class_exists('Cfg');
     return array(
-        $changedConfig,
-        'Authentication configuration on `config.php` should be changed from the distributed one. Keeping it the same is a security risk for you.'
+        $classExists,
+        'You need to configure the authentication of the application, please, read the related setion on readme. (Missing `config.php`)'
     );
 };
 

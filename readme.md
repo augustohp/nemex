@@ -39,7 +39,8 @@ easy:
 
 ## Configuration
 
-1. Edit `usr` and `pwd` in config.php
+2. Copy `config.php-dist` to `config.php`.
+1. Edit `usr` and `pwd` in `config.php`.
 1. Go to <http://www.mydomain.com/nemex>
 
 ## License
