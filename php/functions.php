@@ -57,3 +57,15 @@
         return str_replace(array('/', '\\'), DS, $path);
     }
 
+function redirect($urlPath)
+{
+    $hostname = $_SERVER['HTTP_HOST'];
+    $path = dirname($_SERVER['PHP_SELF']);
+    $urlPath = ($path == '/') ? $urlPath : $path.'/'.$urlPath;
+    $urlPath = str_replace('//', '/', $urlPath);
+
+    $destinationUrl = sprintf('//%s/%s', $hostname, $urlPath);
+    header('Location: '.$destinationUrl);
+    exit;
+}
+

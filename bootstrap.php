@@ -17,8 +17,4 @@ setlocale(LC_ALL, 'en_US.UTF8');
 require_once NEMEX_PATH.'php'.DS.'functions.php';
 require_once NEMEX_PATH.'php'.DS.'user.php';
 require_once normalizeFilePath(NEMEX_PATH.'config.php');
-
-$requestIsLogin = (boolean) ($_SERVER['PHP_SELF'] == '/login.php');
-if (false === $requestIsLogin) {
-    require normalizeFilePath(NEMEX_PATH.'auth.php');
-}
+require NEMEX_PATH.'auth.php';

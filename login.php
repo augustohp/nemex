@@ -1,36 +1,18 @@
 <?php
 require 'bootstrap.php';
 
-     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      session_start();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $cfg = new Cfg();
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    $passwort = filter_input(INPUT_POST, 'passwort', FILTER_SANITIZE_STRING);
 
-      $cfg = new Cfg();
-
-
-      $username = $_POST['username'];
-      $passwort = $_POST['passwort'];
-
-      $hostname = $_SERVER['HTTP_HOST'];
-      $path = dirname($_SERVER['PHP_SELF']);
-
-      // Benutzername und Passwort werden überprüft
-      if ($username == $cfg->getUsr() && $passwort == $cfg->getPwd()) {
-       $_SESSION['angemeldet'] = true;
-
-       // Weiterleitung zur geschützten Startseite
-       if ($_SERVER['SERVER_PROTOCOL'] == 'HTTP/1.1') {
-        if (php_sapi_name() == 'cgi') {
-         header('Status: 303 See Other');
-         }
-        else {
-         header('HTTP/1.1 303 See Other');
-         }
-        }
-
-       header('Location: http://'.$hostname.($path == '/' ? '' : $path).'/index.php');
-       exit;
-       }
-      }
+    if ($username == $cfg->getUsr() && $passwort == $cfg->getPwd()) {
+        $_SESSION['logged'] = true;
+        redirect('index.php');
+    } else {
+        header('HTTP/1.1 403 Forbidden');
+    }
+}
 ?>
 <html>
   <head>
@@ -39,7 +21,7 @@ require 'bootstrap.php';
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/style-res.css">
     <link rel="icon" type="image/png" href="favicon.png" />
-
+    <title>Nemex: Authentication Required</title>
    </head>
 
   <body class="login">
