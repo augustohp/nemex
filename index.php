@@ -1,7 +1,6 @@
 <?php
     require 'bootstrap.php';
 
-	include_once('php/project.php');
 
 	$u = new user('1');
 
@@ -40,12 +39,11 @@
 
 	<?php
 		if(isset($_GET['view']) ) {
-			$p = new project($_GET['view'], '1');
-			$p->getNodes();
-			$p->showProject();
+			$p = new Nemex\Legacy\Project($_GET['view']);
+			echo $p->showProject();
 		}
 		else if(isset($_GET['deleteProject']) ) {
-			$p = new project($_GET['deleteProject'], '1');
+			$p = new Nemex\Legacy\Project($_GET['deleteProject']);
 			$p->deleteProject();
 		}
 		else {

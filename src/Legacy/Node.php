@@ -1,5 +1,6 @@
 <?php
-  require __DIR__.'/../bootstrap.php';
+
+namespace Nemex\Legacy;
 
 class node {
 

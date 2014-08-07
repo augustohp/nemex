@@ -1,7 +1,9 @@
 {
     "require": {
         "php": ">=5.4",
-        "respect/validation": "@stable"
+        "respect/validation": "@stable",
+        "twig/twig": "@stable",
+        "michelf/php-markdown": "@stable"
     },
     "require-dev": {
         "phpunit/phpunit": "4.1.*"

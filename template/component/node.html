@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="snap-drawers">
+        <div class="snap-drawer snap-drawer-right">
+            <div class="edit m-sub e"></div>
+            <div class="delete m-sub d "></div>
+        </div>
+    </div>
+
+    <div  class="itemId">{{ name }}</div>
+
+    <div id="p-{{ id }}" class="snap-content c3">
+        <p class="date">{{ date }}</p>
+        <div class="ncontent">
+            {% if type == "image" %}
+                {% include 'component/node/image.html' %}
+            {% else %}
+                {% include 'component/node/markdown.html' %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="c3edit">
+        <textarea class="editareafield"></textarea>
+        <div class="save"></div>
+        <div class="discardUpdate"></div>
+        <div class="backup"></div>
+    </div>
+
+</div>

@@ -1,0 +1,58 @@
+<div class="header">
+    <span>{{ name }} </span>
+</div>
+
+        <div id="editmenu"></div>
+
+        <div class="navigation">
+            <a class="index" href="index.php">
+                <img src="img/nemex.svg" />
+            </a>
+            <a id="markdownhelp"><img src="img/markdown.svg" /></a>
+        </div>
+
+        <progress id="uploadprogress" min="0" max="100" value="0" >0</progress>
+
+        <div id="project" class="pcontent">
+
+        <article>
+            <div id="holder">
+                <input id="pup" class="knob" data-width="100" data-angleOffset="0" data-fgColor="#81DCDD" data-bgColor="#FFFFFF" data-thickness=".05" value="0">
+            </div>
+
+            <p id="upload" class="hidden">
+                <span class="cameraupload"></span>
+                <input id="uup" class="upload" type="file">
+            </p>
+
+            <p id="filereader"></p>
+            <p id="formdata"></p>
+            <p id="progress"></p>
+        </article>
+
+        <div class="activeProject">{{ name }}</div>
+
+        <div id="newMarkdown" class="row">
+            <div class="c3 edit-mode">
+                <p class="date">preview</p>
+                <div class="ncontent"><div class="content"></div></div>
+                <div class="actions">
+                    <div class="edit" data-target="'.$align.'"></div>
+                    <div class="delete"></div>
+                </div>
+            </div>
+            <div class="c3edit" style="display:inline-block;">
+                <textarea id="addfield" class="editareafield" placeholder="start writing markdown here" ></textarea>
+                <div class="addPost"></div>
+                <div class="discardAdd"></div>
+                <div class="backup"></div>
+            </div>
+        </div>
+</div>
+
+{{ content }}
+
+<script>
+    var noElements = {{ total_nodes }}
+</script>
+

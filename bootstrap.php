@@ -14,6 +14,7 @@ ini_set('log_errors', 1);
 ini_set('error_log', NEMEX_PATH.'error.log');
 setlocale(LC_ALL, 'en_US.UTF8');
 
+require 'vendor/autoload.php';
 require_once NEMEX_PATH.'php/functions.php';
 require_once NEMEX_PATH.'php/user.php';
 include_once NEMEX_PATH.'config.php';

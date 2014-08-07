@@ -33,7 +33,7 @@
 				// print_r($plist);
 
 				foreach ($plist as $p) {
-					array_push($this->projects, new project( $p, $this->user_id ) );
+					array_push($this->projects, new Nemex\Legacy\Project($p) );
 				}
 
 				closedir($handle);
@@ -71,7 +71,7 @@
 				if (!file_exists(NEMEX_PATH.'projects/'.$ptitle)) {
 				    mkdir(NEMEX_PATH.'projects/'.$ptitle, 0777, true);
 				 	mkdir(NEMEX_PATH.'projects/'.$ptitle.'/big', 0777, true);
-				 	array_push($this->projects, new project( $ptitle, $this->user_id ) );
+				 	array_push($this->projects, new Nemex\Legacy\Project( $ptitle, $this->user_id ) );
 				}
 				else echo "no";
 			}else echo "error";
