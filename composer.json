@@ -1,0 +1,14 @@
+{
+    "require": {
+        "php": ">=5.4",
+        "respect/validation": "@stable"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nemex\\": "src"
+        }
+    }
+}
