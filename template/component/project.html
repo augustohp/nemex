@@ -1,11 +1,11 @@
-<div class="header">
+<div id="projectName" class="header">
     <span>{{ name }} </span>
 </div>
 
         <div id="editmenu"></div>
 
         <div class="navigation">
-            <a class="index" href="index.php">
+            <a id="lsiProjects" class="index" href="index.php">
                 <img src="img/nemex.svg" />
             </a>
             <a id="markdownhelp"><img src="img/markdown.svg" /></a>
@@ -37,20 +37,21 @@
                 <p class="date">preview</p>
                 <div class="ncontent"><div class="content"></div></div>
                 <div class="actions">
-                    <div class="edit" data-target="'.$align.'"></div>
+                    <div class="edit" data-target="r"></div>
                     <div class="delete"></div>
                 </div>
             </div>
             <div class="c3edit" style="display:inline-block;">
                 <textarea id="addfield" class="editareafield" placeholder="start writing markdown here" ></textarea>
-                <div class="addPost"></div>
-                <div class="discardAdd"></div>
+                <a id="createPost" class="addPost"></a>
+                <div id="discardPost" class="discardAdd"></div>
                 <div class="backup"></div>
             </div>
         </div>
-</div>
 
-{{ content }}
+    {{ content }}
+
+</div>
 
 <script>
     var noElements = {{ total_nodes }}

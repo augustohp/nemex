@@ -21,7 +21,12 @@
         <testsuite name="unit">
             <directory>test/unit</directory>
         </testsuite>
+        <testsuite name="functional">
+            <directory>test/functional</directory>
+        </testsuite>
     </testsuites>
 </phpunit>
 
-<!-- ex: et sw=4 ts=4 ft=xml: -->
+<!--
+     ex: et sw=4 ts=4 ft=xml:
+-->
