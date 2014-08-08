@@ -1,0 +1,29 @@
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
+    backupGlobals="true"
+    backupStaticAttributes="false"
+    cacheTokens="false"
+    colors="false"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    mapTestClassNameToCoveredClassName="false"
+    processIsolation="false"
+    stopOnError="false"
+    stopOnFailure="false"
+    stopOnIncomplete="false"
+    stopOnSkipped="false"
+    strict="true"
+    verbose="true">
+
+    <testsuites>
+        <testsuite name="functional">
+            <directory>test/functional</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
+
+<!--
+     ex: et sw=4 ts=4 ft=xml:
+-->
