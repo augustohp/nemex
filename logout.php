@@ -1,7 +1,6 @@
 <?php
 require __DIR__.'/bootstrap.php';
-session_name('NEMEX');
-session_start();
+
 $_SESSION = array();
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
