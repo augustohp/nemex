@@ -29,4 +29,4 @@ if (is_authenticated_user($_SESSION)) {
     return;
 }
 
-redirect('/login.php');
+redirect('login.php');
