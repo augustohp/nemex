@@ -31,10 +31,6 @@ require __DIR__.'/../bootstrap.php';
    			$expected_base_dir = realpath(NEMEX_PATH.'projects/');
    			$path_info = pathinfo(realpath(NEMEX_PATH.'projects/'.$name));
 
-   			// debug($expected_base_dir, 'expected_base_dir');
-   			// debug(realpath(NEMEX_PATH.'projects/'.$name), 'realpath');
-   			// debug($path_info, 'path_info');
-
    			if (isset($path_info['dirname']) AND $path_info['dirname'] === $expected_base_dir) {
    				return $path_info['basename'];
    			}
@@ -175,7 +171,6 @@ echo '';
 
 
 		function getColumn($content, $align) {
-				//$content = substr($content, 17, strlen($content));
 				echo '<div class="content">';
 				echo Markdown($content);
 				echo '</div>';
@@ -187,29 +182,10 @@ echo '';
 		}
 
 
-		function addProject() {}
-
-		function deleteProject() {
-			foreach (new DirectoryIterator(NEMEX_PATH.'projects/'.$this->name.'/big') as $fileInfo) {
-			    if($fileInfo->isDot() || !$fileInfo->isFile()) continue;
-			    unlink(NEMEX_PATH.'projects/'.$this->name."/big/".$fileInfo->getFilename());
-			}
-			rmdir(NEMEX_PATH.'projects/'.$_GET['project'].'/big');
-
-			foreach (new DirectoryIterator(NEMEX_PATH.'projects/'.$this->name) as $fileInfo) {
-			    if($fileInfo->isDot() || !$fileInfo->isFile()) continue;
-			    unlink(NEMEX_PATH.'projects/'.$this->name."/".$fileInfo->getFilename());
-			}
-			rmdir(NEMEX_PATH.'projects/'.$this->name);
-		}
-
-
 		function getNodes() {
 			$files = array();
 
 			$f = glob(NEMEX_PATH.'projects/'.$this->name.'/{*.jpg,*.gif,*.png,*.md,*.txt}', GLOB_BRACE);
-
-			// print_r(NEMEX_PATH.'projects/'.$this->name.'/{*.jpg,*.gif,*.png,*.md,*.txt}');
 
 			if (is_array($f) && count($f) > 0) {
 				$files = $f;
@@ -231,8 +207,6 @@ echo '';
 		function getTitleImage() {
 			$this->getNodes();
 
-			// print_r($this->nodes);
-
 			foreach ($this->nodes as $node) {
 				if($node->getType() == 'img') {
 					return $this->name.'/'.$node->getName();
@@ -240,10 +214,6 @@ echo '';
 			}
 		}
 
-
-		function addNode() {}
-
-		function delNode() {}
 
 	}
 
