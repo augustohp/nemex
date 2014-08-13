@@ -1,6 +1,5 @@
 <?php
-	require __DIR__.'../bootstrap.php';
-
+	require __DIR__.'/../bootstrap.php';
 
 	$filehash = substr(randomHash(), 12);
 
