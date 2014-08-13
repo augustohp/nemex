@@ -61,6 +61,7 @@ function redirect($urlPath)
 {
     $hostname = $_SERVER['HTTP_HOST'];
     $path = dirname($_SERVER['PHP_SELF']);
+    $urlPath = ltrim($urlPath, '/');
     $urlPath = ($path == '/') ? $urlPath : $path.'/'.$urlPath;
     $urlPath = str_replace('//', '/', $urlPath);
 
