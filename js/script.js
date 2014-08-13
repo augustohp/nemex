@@ -19,12 +19,12 @@ jQuery.fn.visibilityToggle = function() {
 $( window ).load(function() {
 
   for(var i = 0; i < noElements; i++){
-  
+
     if($('#p'+i).children('.ncontent').children('img').length || $('#p'+i).children('.ncontent').children('a').children('img').length) {
       //alert("img");
       $('#p'+i).parent().children('.snap-drawers').children('.snap-drawer').children('.e').hide();
       $('#p'+i).parent().children('.snap-drawers').children('.snap-drawer').children('.m-sub').height( $('#p'+i).children('.ncontent').height()-73);
-    } 
+    }
     else
       $('#p'+i).parent().children('.snap-drawers').children('.snap-drawer').children('.m-sub').height( ($('#p'+i).children('.ncontent').height()) /2);
     }
@@ -37,11 +37,11 @@ $( window ).load(function() {
 $( window ).resize(function() {
 
   for(var i = 0; i < noElements; i++){
-  
+
     if($('#p'+i).children('.ncontent').children('img').length || $('#p'+i).children('.ncontent').children('a').children('img').length) {
       $('#p'+i).parent().children('.snap-drawers').children('.snap-drawer').children('.e').hide();
       $('#p'+i).parent().children('.snap-drawers').children('.snap-drawer').children('.m-sub').height( $('#p'+i).children('.ncontent').height()-73);
-    } 
+    }
     else
       $('#p'+i).parent().children('.snap-drawers').children('.snap-drawer').children('.m-sub').height( ($('#p'+i).children('.ncontent').height()) /2);
   }
@@ -62,7 +62,7 @@ $(document).ready(function(){
 
     var snappers = new Array();
     for(var i = 0; i < noElements; i++){
-      snappers.push( 
+      snappers.push(
         new Snap({
             element: document.getElementById('p'+i),
             disable:'left',
@@ -81,7 +81,7 @@ $(document).ready(function(){
     );
   }
 
-  
+
   $(".project-list-item").hover(function(){
     if(!mobile) $(this).children('.p_actions').visibilityToggle();
   });
@@ -114,7 +114,7 @@ $(document).ready(function(){
     $('#newMarkdown').slideToggle();
     $('#newMarkdown').children(".c3edit").children(".editareafield").val('');
     $('#newMarkdown').children(".c3").children(".content").html('');
-    $('#newMarkdown').children(".c3edit").children(".editareafield").trigger('autosize.resize');  
+    $('#newMarkdown').children(".c3edit").children(".editareafield").trigger('autosize.resize');
   });
 
 
@@ -158,10 +158,10 @@ $('#newProject').keypress(function (e) {
 
 
 // DELETE ITEM - swipe
-$(document).on("click",".p_delete",function(e){ 
+$(document).on("click",".p_delete",function(e){
   var project = $(this).parent().parent().parent().attr('href');
   project = project.substring(project.lastIndexOf('=')+1);
- 
+
   e.preventDefault();
 
   if (confirm('Do you really want to delete the project?')) {
@@ -169,11 +169,11 @@ $(document).on("click",".p_delete",function(e){
       type: "POST",
       url: "php/deleteProject.php",
       data: {project:project},
-      success: function(data){          
+      success: function(data){
         location.reload();
       }
     });
-  } 
+  }
 });
 
 $('#markdownhelp').click(function(e) {
@@ -187,32 +187,23 @@ $(".p_download").click(function(e){
 
   e.stopPropagation();
   e.preventDefault();
-  window.location.href= 'php/zipProject.php?project='+project; 
-  
+  window.location.href= 'php/zipProject.php?project='+project;
+
 });
 
 
 // DOWNLOAD ITEM - button
-$(document).on("click",".download-big",function(e){ 
+$(document).on("click",".download-big",function(e){
   var itemId = $(this).parent().parent().parent().parent().children('.itemId').html();
   var project = $('.activeProject').html();
   var ext = itemId.split('.').pop();
 
  window.location.href= 'php/downloadNode.php?project='+project+'&itemId='+itemId+'&ext='+ext;
-  $.ajax({
-    type: "POST",
-    url: "php/downloadImage.php",
-    data: {project:project, itemId:itemId},
-    success: function(data){  
-       window.location.href=data; 
-      //location.reload();
-    }
-  });
 });
 
 
 
-$(document).on("click",".p_update",function(e){ 
+$(document).on("click",".p_update",function(e){
   alert("delete");
   e.preventDefault();
 });
@@ -221,14 +212,14 @@ $(document).on("click",".p_update",function(e){
 
 // UPDATE PROJECT ITEM
 
-$(document).on("click",".addPost",function(e){ 
+$(document).on("click",".addPost",function(e){
   var itemContent = $(this).parent().children('.editareafield').val();
   var project = $(this).parent().parent().parent().children('.activeProject').html();
 
   $.ajax({
     type: "POST",
     url: "php/addNode.php",
-    data: {project:project, itemContent:itemContent},    
+    data: {project:project, itemContent:itemContent},
     success: function(data){
       location.reload();
     }
@@ -237,32 +228,32 @@ $(document).on("click",".addPost",function(e){
 
 
 // DISCARD UPDATE PROJECT ITEM
-$(document).on("click",".discardUpdate",function(e){ 
-  $(this).parent().children('.backup').html()  
+$(document).on("click",".discardUpdate",function(e){
+  $(this).parent().children('.backup').html()
   $(this).parent().parent().children(".c3").children(".ncontent").children(".content").html($(this).parent().children('.backup').html() );
 
-  $(this).parent().parent().children(".c3").toggleClass("edit-mode");    
+  $(this).parent().parent().children(".c3").toggleClass("edit-mode");
   $(this).parent().parent().children(".c3edit").toggle();
-  
+
   if(!mobile)
     $(this).parent().parent().children(".c3").children(".ncontent").children('.actions').visibilityToggle();
- 
+
   $(this).parent().parent().children(".snap-drawers").visibilityToggle();
-  
+
 });
 
 
 
 
 // UPDATE PROJECT ITEM
-$(document).on("click",".save",function(e){	
+$(document).on("click",".save",function(e){
 	var itemContent = $(this).parent().children('.editareafield').val();
 	var itemId = $(this).parent().parent().children('.itemId').html();
   var project = $(this).parent().parent().parent().children('.activeProject').html();
   var align  = $(this).parent().parent().children('.alignment').html()
-  
+
   $(this).parent().parent().children(".c3").children('.actions').visibilityToggle();
-  
+
   $.ajax({
     type: "POST",
     url: "php/updateItem.php",
@@ -276,7 +267,7 @@ $(document).on("click",".save",function(e){
 
 
 // DELETE ITEM - swipe
-$(document).on("click",".delete",function(e){	
+$(document).on("click",".delete",function(e){
 	var itemId = $(this).parent().parent().parent().children('.itemId').html();
   var project = $('.activeProject').html();
  if (confirm('Do you really want to delete this node?')) {
@@ -284,25 +275,25 @@ $(document).on("click",".delete",function(e){
     type: "POST",
     url: "php/deleteNode.php",
     data: {project:project, itemId:itemId},
-    success: function(data){					
+    success: function(data){
       location.reload();
     }
   });
 }
 });
 
- 
+
 
 // DELETE ITEM - button
-$(document).on("click",".delete-big",function(e){ 
+$(document).on("click",".delete-big",function(e){
   var itemId = $(this).parent().parent().parent().parent().children('.itemId').html();
   var project = $('.activeProject').html();
-   if (confirm('Do you really want to delete this node?')) { 
+   if (confirm('Do you really want to delete this node?')) {
   $.ajax({
     type: "POST",
     url: "php/deleteNode.php",
     data: {project:project, itemId:itemId},
-    success: function(data){          
+    success: function(data){
      location.reload();
     }
   });
@@ -316,36 +307,36 @@ $(document).on("click",".delete-big",function(e){
 var state = 1;
 
 
-$(document).on("click",".edit",function(e){	
+$(document).on("click",".edit",function(e){
   $(this).parent().parent().parent().children(".snap-drawers").visibilityToggle();
   var currentContent = $(this).parent().parent().parent().children(".c3").children(".ncontent").children(".content").html();
 
   $(this).parent().parent().parent().children(".c3edit").children(".backup").html(currentContent);
-  
+
   var t = toMarkdown(currentContent);
   $(this).parent().parent().parent().children(".c3edit").children(".editareafield").val(t);
   $(this).parent().parent().parent().children(".c3").toggleClass("edit-mode");
-  
+
   $(this).parent().parent().parent().children(".c3edit").toggle();
   $(this).parent().parent().parent().children(".c3edit").children(".editarea").focus();
   $(this).parent().parent().parent().children(".c3edit").children(".editareafield").trigger('autosize.resize');
 });
 
 
-$(document).on("click",".edit-big",function(e){ 
-  //$(this).children('.c3').find('.actions').css('visibility', 'hidden'); 
+$(document).on("click",".edit-big",function(e){
+  //$(this).children('.c3').find('.actions').css('visibility', 'hidden');
 
   $(this).parent().parent().parent().parent().children(".snap-drawers").visibilityToggle();
   $(this).parent().visibilityToggle();
- 
+
   var currentContent = $(this).parent().parent().children(".content").html();
 
   $(this).parent().parent().parent().parent().children(".c3edit").children(".backup").html(currentContent);
-  
+
   var t = toMarkdown(currentContent);
   $(this).parent().parent().parent().parent().children(".c3edit").children(".editareafield").val(t);
   $(this).parent().parent().parent().parent().children(".c3").toggleClass("edit-mode");
-  
+
   $(this).parent().parent().parent().parent().children(".c3edit").toggle();
   $(this).parent().parent().parent().parent().children(".c3edit").children(".editarea").focus();
   $(this).parent().parent().parent().parent().children(".c3edit").children(".editareafield").trigger('autosize.resize');
@@ -372,14 +363,14 @@ var typewatch = (function(){
   return function(callback, ms){
     clearTimeout (timer);
     timer = setTimeout(callback, ms);
-  }  
+  }
 })();
 
 
 
 $("#projects").change(function() {
   var project = $(this).val();
- 
+
   $.ajax({
     type: "POST",
     url: "php/getProject.php",
@@ -400,7 +391,7 @@ var holder = document,
       dnd: 'draggable' in document.createElement('span'),
       formdata: !!window.FormData,
       progress: "upload" in new XMLHttpRequest
-    }, 
+    },
   support = {
     filereader: document.getElementById('filereader'),
     formdata: document.getElementById('formdata'),
@@ -456,9 +447,9 @@ var holder = document,
         if (tests.formdata){
           formData.append('file', files[i]);
           //var p = document.getElementById('activeProject').value;
-          var p = $('.activeProject').html(); 
+          var p = $('.activeProject').html();
           formData.append('project', p);
-        } 
+        }
 
         previewfile(files[i]);
       }
@@ -472,8 +463,8 @@ var holder = document,
           progress.value = progress.innerHTML = 100;
 
           //var project = document.getElementById('activeProject').value;
-          var project = $('.activeProject').html(); 
-          
+          var project = $('.activeProject').html();
+
           location.reload();
       };
 
@@ -485,12 +476,12 @@ var holder = document,
           }
         }
       }
-      
+
       xhr.send(formData);
     }
   }
 
-  if (tests.dnd) { 
+  if (tests.dnd) {
     holder.ondragover = function () { this.className = 'hover'; return false; };
     holder.ondragend = function () { this.className = ''; return false; };
     holder.ondrop = function (e) {
@@ -500,7 +491,7 @@ var holder = document,
       e.preventDefault();
       readfiles(e.dataTransfer.files);
     }
-    
+
     $("#uup").change(function(e){
       e.preventDefault();
       console.log(e);
