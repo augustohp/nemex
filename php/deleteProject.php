@@ -3,18 +3,18 @@
 
 	if(isset($_POST['project'])) {
 
-		foreach (new DirectoryIterator(NEMEX_PATH.'projects/'.$_POST['project'].'/big') as $fileInfo) {
+		foreach (new DirectoryIterator(NEMEX_PROJECTS.$_POST['project'].'/big') as $fileInfo) {
 		    if($fileInfo->isDot() || !$fileInfo->isFile()) continue;
-		    unlink(NEMEX_PATH.'projects/'.$_POST['project']."/big/".$fileInfo->getFilename());
+		    unlink(NEMEX_PROJECTS.$_POST['project']."/big/".$fileInfo->getFilename());
 		}
 
-		rmdir(NEMEX_PATH.'projects/'.$_POST['project'].'/big');
+		rmdir(NEMEX_PROJECTS.$_POST['project'].'/big');
 
-		foreach (new DirectoryIterator(NEMEX_PATH.'projects/'.$_POST['project']) as $fileInfo) {
+		foreach (new DirectoryIterator(NEMEX_PROJECTS.$_POST['project']) as $fileInfo) {
 		    if($fileInfo->isDot() || !$fileInfo->isFile()) continue;
-		    unlink(NEMEX_PATH.'projects/'.$_POST['project']."/".$fileInfo->getFilename());
+		    unlink(NEMEX_PROJECTS.$_POST['project']."/".$fileInfo->getFilename());
 		}
 
-	 	rmdir(NEMEX_PATH.'projects/'.$_POST['project']);
+	 	rmdir(NEMEX_PROJECTS.$_POST['project']);
 	}
 ?>

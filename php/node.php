@@ -17,21 +17,21 @@ class node {
 
    $this->extractTime();
    $this->type = $this->extractType();
-   $this->content = file_get_contents(NEMEX_PATH.'projects/'.$this->project.'/'.$this->name);
+   $this->content = file_get_contents(NEMEX_PROJECTS.$this->project.'/'.$this->name);
   }
 
 
 
 
  function extractTime() {
-  $timestamp = filemtime(NEMEX_PATH.'projects/'.$this->project.'/'.$this->name);
+  $timestamp = filemtime(NEMEX_PROJECTS.$this->project.'/'.$this->name);
   $this->time = date("j. F Y", $timestamp);
  }
 
 
 
 function extractType() {
-  $path_parts = pathinfo(NEMEX_PATH.'projects/'.$this->project.'/'.$this->name);
+  $path_parts = pathinfo(NEMEX_PROJECTS.$this->project.'/'.$this->name);
   if($path_parts['extension'] == 'jpg' || $path_parts['extension'] == 'jpeg' || $path_parts['extension'] == 'JPG'|| $path_parts['extension'] == 'png' || $path_parts['extension'] == 'gif')
    return 'img';
  else if($path_parts['extension'] == 'txt')

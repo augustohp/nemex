@@ -17,11 +17,11 @@
 		function loadProjects() {
 			$plist = array();
 
-			if ($handle = opendir(NEMEX_PATH.'projects')) {
+			if ($handle = opendir(NEMEX_PROJECTS)) {
 			    $blacklist = array('.', '..');
 
 			    while (false !== ($file = readdir($handle))) {
-			    	$full_path = NEMEX_PATH.'projects/'.$file;
+			    	$full_path = NEMEX_PROJECTS.$file;
 
 			        if ( ! in_array($file, $blacklist) AND is_dir($full_path)) {
 			        	$plist[filemtime($full_path)] = $file;
@@ -68,9 +68,9 @@
 
 		function addProject($ptitle) {
 			if(!empty($ptitle)){
-				if (!file_exists(NEMEX_PATH.'projects/'.$ptitle)) {
-				    mkdir(NEMEX_PATH.'projects/'.$ptitle, 0777, true);
-				 	mkdir(NEMEX_PATH.'projects/'.$ptitle.'/big', 0777, true);
+				if (!file_exists(NEMEX_PROJECTS.$ptitle)) {
+				    mkdir(NEMEX_PROJECTS.$ptitle, 0777, true);
+				 	mkdir(NEMEX_PROJECTS.$ptitle.'/big', 0777, true);
 				 	array_push($this->projects, new project( $ptitle, $this->user_id ) );
 				}
 				else echo "no";

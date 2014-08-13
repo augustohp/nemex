@@ -28,11 +28,11 @@ require __DIR__.'/../bootstrap.php';
 
 
    		function normalizeName($name = '') {
-   			$expected_base_dir = realpath(NEMEX_PATH.'projects/');
-   			$path_info = pathinfo(realpath(NEMEX_PATH.'projects/'.$name));
+   			$expected_base_dir = realpath(NEMEX_PROJECTS);
+   			$path_info = pathinfo(realpath(NEMEX_PROJECTS.$name));
 
    			// debug($expected_base_dir, 'expected_base_dir');
-   			// debug(realpath(NEMEX_PATH.'projects/'.$name), 'realpath');
+   			// debug(realpath(NEMEX_PROJECTS.$name), 'realpath');
    			// debug($path_info, 'path_info');
 
    			if (isset($path_info['dirname']) AND $path_info['dirname'] === $expected_base_dir) {
@@ -51,7 +51,7 @@ require __DIR__.'/../bootstrap.php';
    		}
 
    		function getNumNodes(){
-   			$nodes_in_folder = scandir(NEMEX_PATH.'projects/'.$this->name);
+   			$nodes_in_folder = scandir(NEMEX_PROJECTS.$this->name);
 
    			$nodes_in_folder = array_filter($nodes_in_folder, create_function('$node_name', '
    				return (substr($node_name, 0, 1) !== "." AND ! in_array($node_name, ["index.php", "big"]));
@@ -148,9 +148,9 @@ echo '';
 								<div id="p'.$counter.'" class="snap-content c3" >
 									<p class="date">'.$datum.'</p>
 									<div class="ncontent">';
-									$big=file_exists(NEMEX_PATH."projects/".$this->name.'/big/'.$node->getName());
+									$big=file_exists(NEMEX_PROJECTS.$node->getName());
 									if($big)
-										echo '<a href="'.NEMEX_PATH."projects/".$this->name.'/big/'.$node->getName().'" target=_blank>';
+										echo '<a href="'.NEMEX_PROJECTS.$node->getName().'" target=_blank>';
 									echo '<img src=\'projects/'.$this->name.'/'.$node->getName().' \'/>';
 									if($big)
 										echo '</a>';
@@ -190,26 +190,26 @@ echo '';
 		function addProject() {}
 
 		function deleteProject() {
-			foreach (new DirectoryIterator(NEMEX_PATH.'projects/'.$this->name.'/big') as $fileInfo) {
+			foreach (new DirectoryIterator(NEMEX_PROJECTS.$this->name.'/big') as $fileInfo) {
 			    if($fileInfo->isDot() || !$fileInfo->isFile()) continue;
-			    unlink(NEMEX_PATH.'projects/'.$this->name."/big/".$fileInfo->getFilename());
+			    unlink(NEMEX_PROJECTS.$this->name."/big/".$fileInfo->getFilename());
 			}
-			rmdir(NEMEX_PATH.'projects/'.$_GET['project'].'/big');
+			rmdir(NEMEX_PROJECTS.$_GET['project'].'/big');
 
-			foreach (new DirectoryIterator(NEMEX_PATH.'projects/'.$this->name) as $fileInfo) {
+			foreach (new DirectoryIterator(NEMEX_PROJECTS.$this->name) as $fileInfo) {
 			    if($fileInfo->isDot() || !$fileInfo->isFile()) continue;
-			    unlink(NEMEX_PATH.'projects/'.$this->name."/".$fileInfo->getFilename());
+			    unlink(NEMEX_PROJECTS.$this->name."/".$fileInfo->getFilename());
 			}
-			rmdir(NEMEX_PATH.'projects/'.$this->name);
+			rmdir(NEMEX_PROJECTS.$this->name);
 		}
 
 
 		function getNodes() {
 			$files = array();
 
-			$f = glob(NEMEX_PATH.'projects/'.$this->name.'/{*.jpg,*.gif,*.png,*.md,*.txt}', GLOB_BRACE);
+			$f = glob(NEMEX_PROJECTS.$this->name.'/{*.jpg,*.gif,*.png,*.md,*.txt}', GLOB_BRACE);
 
-			// print_r(NEMEX_PATH.'projects/'.$this->name.'/{*.jpg,*.gif,*.png,*.md,*.txt}');
+			// print_r(NEMEX_PROJECTS.$this->name.'/{*.jpg,*.gif,*.png,*.md,*.txt}');
 
 			if (is_array($f) && count($f) > 0) {
 				$files = $f;

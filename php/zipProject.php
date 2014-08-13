@@ -7,26 +7,26 @@
 	$zip = new ZipArchive;
 
 	$zipName = $_GET['project'].'-'.$filehash.'.zip';
-	$archive_file_name = NEMEX_PATH.'projects/'.$project.'/'.$zipName;
+	$archive_file_name = NEMEX_PROJECTS.$project.'/'.$zipName;
 
 	$added_a_file = false;
 
 	if ($zip->open($archive_file_name, ZipArchive::CREATE)) {
 
-		foreach (new DirectoryIterator(NEMEX_PATH.'projects/'.$project.'/big/') as $fileInfo2) {
+		foreach (new DirectoryIterator(NEMEX_PROJECTS.$project.'/big/') as $fileInfo2) {
 		    if($fileInfo2->isDot() || !$fileInfo2->isFile() || $fileInfo2 == 'index.php') continue;
-	   	    $zip->addFile(NEMEX_PATH.'projects/'.$project.'/big/'.$fileInfo2, $project.'/'.$fileInfo2);
+	   	    $zip->addFile(NEMEX_PROJECTS.$project.'/big/'.$fileInfo2, $project.'/'.$fileInfo2);
 	   	    $added_a_file = true;
 		}
 
-		foreach (new DirectoryIterator(NEMEX_PATH.'projects/'.$project) as $fileInfo) {
+		foreach (new DirectoryIterator(NEMEX_PROJECTS.$project) as $fileInfo) {
 		    if($fileInfo->isDot() || !$fileInfo->isFile() || $fileInfo == 'index.php') continue;
 
-		    $path_parts = pathinfo(NEMEX_PATH.'projects/'.$fileInfo);
+		    $path_parts = pathinfo(NEMEX_PROJECTS.$fileInfo);
 			$extension = strtolower($path_parts['extension']);
 
 			if($extension == 'txt' || $extension == 'md' ) {
-		    	$zip->addFile(NEMEX_PATH.'projects/'.$project.'/'.$fileInfo, $project.'/'.$fileInfo);
+		    	$zip->addFile(NEMEX_PROJECTS.$project.'/'.$fileInfo, $project.'/'.$fileInfo);
 		    	$added_a_file = true;
 		    }
 		}

@@ -23,7 +23,7 @@ $tests[] = function() {
 };
 $tests[] = function() {
     return array(
-        is_writable(NEMEX_PATH.'projects'),
+        is_writable(NEMEX_PROJECTS),
         '"projects" folder is writable. Without that, you won\'t be able to use Nemex.'
     );
 };

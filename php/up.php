@@ -62,7 +62,7 @@ require __DIR__.'/../bootstrap.php';
 	if ($ext === 'jpeg') $ext = 'jpg';
 
 	$name = time().'-'.$filehash.'.'.$ext;
-	$filename = NEMEX_PATH.'projects/'.$project.'/'.$name;
+	$filename = NEMEX_PROJECTS.$project.'/'.$name;
 
 	if( !$exif) {
 		list($width, $height, $type, $attr) = getimagesize($_FILES['file']['tmp_name']);
@@ -103,16 +103,16 @@ require __DIR__.'/../bootstrap.php';
 		}
 
 		imagedestroy($tmp);
-		$filepath = NEMEX_PATH.'projects/'.$project.'/big/'.$name;
+		$filepath = NEMEX_PROJECTS.$project.'/big/'.$name;
 		move_uploaded_file($_FILES['file']['tmp_name'], $filepath);
 	}
 	else {
 		$ext = 	strtolower($path_parts['extension']);
 		$name = time().'-'.$filehash.'.'.$ext;
-		$filepath = NEMEX_PATH.'projects/'.$project.'/'.$name;
+		$filepath = NEMEX_PROJECTS.$project.'/'.$name;
 
 		if(move_uploaded_file($_FILES['file']['tmp_name'], $filepath)) {
-			copy($filepath, NEMEX_PATH.'projects/'.$project.'/big/'.$name);
+			copy($filepath, NEMEX_PROJECTS.$project.'/big/'.$name);
 		}
 
 

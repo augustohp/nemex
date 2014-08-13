@@ -9,7 +9,7 @@
 
 		if (strlen($Project->name)) {
 
-			$expected_base_dir = realpath(NEMEX_PATH.'projects/' . $Project->name);
+			$expected_base_dir = realpath(NEMEX_PROJECTS . $Project->name);
 
 			$possible_item_paths = [];
 			$possible_item_paths[] = realpath($expected_base_dir . '/' . $_POST['itemId']);
