@@ -3,3 +3,5 @@
 projects/*
 .vagrant
 config.php
+vendor
+*.jar
