@@ -12,14 +12,21 @@ class EndToEndTest extends \PHPUnit_Extensions_SeleniumTestCase
     const ROUTE_INDEX = '/index.php';
 
     private $projectName = '';
+    private $baseUrl = 'http://www.192.168.42.03.xip.io';
+
     protected function setUp()
     {
         $this->cleanProjects();
         $this->configureProjectCredentials();
 
+        $configureBaseUrl = getenv('NEMEX_URL');
+        if ($configureBaseUrl) {
+            $this->baseUrl = $configureBaseUrl;
+        }
+
         //$this->setSpeed(500);
         $this->setBrowser("*chrome");
-        $this->setBrowserUrl(self::BASE_URL);
+        $this->setBrowserUrl($this->baseUrl);
         $this->projectName = uniqid('TEST');
     }
 
@@ -45,7 +52,7 @@ class EndToEndTest extends \PHPUnit_Extensions_SeleniumTestCase
 
     public function assertLocation($urlPath)
     {
-        $url = sprintf('%s%s', self::BASE_URL, $urlPath);
+        $url = sprintf('%s%s', $this->baseUrl, $urlPath);
 
         parent::assertLocation($url);
     }
