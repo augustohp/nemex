@@ -1,4 +1,4 @@
-# Nemex
+# Nemex [![Build Status](https://travis-ci.org/augustohp/nemex.svg)](https://travis-ci.org/augustohp/nemex)
 
 A **simple** [way of creating notes][4], on your own webserver,
 using [markdown](http://daringfireball.net/projects/markdown/).
